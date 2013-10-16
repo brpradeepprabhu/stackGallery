@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stack Library</title>
+    <script src="../createjs/easeljs-0.7.0.min.js"></script>
+    <script src="../createjs/preloadjs-0.4.0.min.js"></script>
+    <script src="../createjs/tweenjs-0.5.0.min.js"></script>
+    <script src="../src/stackLibrary.js"></script>
+
+</head>
+<script>
+    var canvas, stage;
+    function init() {
+
+        canvas = document.getElementById("canvas");
+        stage = new createjs.Stage(canvas);
+        var loader = new createjs.LoadQueue(false);
+        var manifest = [
+            {src:"photos/flashmo_600x350_01.jpg", id:"1"},
+            {src:"photos/flashmo_600x350_02.jpg", id:"1"},
+            {src:"photos/flashmo_600x350_03.jpg", id:"1"},
+            {src:"photos/flashmo_600x350_04.jpg", id:"1"},
+            {src:"photos/flashmo_600x350_05.jpg", id:"1"},
+            {src:"photos/flashmo_600x350_06.jpg", id:"1"}
+        ];
+        loader.loadManifest(manifest);
+        loader.addEventListener("complete", ImageLoadComplete);
+        createjs.Ticker.addEventListener("tick", stage);
+    }
+    function ImageLoadComplete() {
+
+        var bitmap1 = new createjs.Bitmap("photos/flashmo_600x350_01.jpg");
+        var bitmap2 = new createjs.Bitmap("photos/flashmo_600x350_02.jpg");
+        var bitmap3 = new createjs.Bitmap("photos/flashmo_600x350_03.jpg");
+        var bitmap4 = new createjs.Bitmap("photos/flashmo_600x350_04.jpg");
+        var bitmap5 = new createjs.Bitmap("photos/flashmo_600x350_05.jpg");
+        var bitmap6 = new createjs.Bitmap("photos/flashmo_600x350_06.jpg");
+        var bitmapArray = [bitmap1, bitmap2, bitmap3, bitmap4, bitmap5, bitmap6];
+        //noinspection JSPotentiallyInvalidConstructorUsage
+        var slider = new imageStack(bitmapArray, stage, {x:500, y:400, width:600, height:350})
+
+    }
+</script>
+<body onload="init()">
+<canvas id="canvas" height="700" width="1000" style="background-color: #e6e6fa"></canvas>
+</body>
+</html>
